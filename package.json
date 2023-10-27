@@ -9,15 +9,33 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@chakra-ui/icons": "^2.1.1",
+    "@chakra-ui/react": "^2.8.1",
+    "@tanstack/react-query": "^4.35.3",
+    "@tanstack/react-query-devtools": "^4.35.3",
+    "axios": "^1.5.1",
+    "dayjs": "^1.11.10",
+    "dotenv": "^16.3.1",
+    "flowbite": "^1.8.1",
+    "flowbite-react": "^0.6.4",
+    "next": "13.5.4",
+    "next-nprogress-bar": "^2.1.2",
     "react": "^18",
     "react-dom": "^18",
-    "next": "13.5.4"
+    "react-icons": "^4.10.1",
+    "react-loading-skeleton": "^3.3.1",
+    "react-paginate": "^8.2.0",
+    "react-tabs": "^6.0.2",
+    "sharp": "^0.32.6",
+    "swiper": "^10.3.1"
   },
   "devDependencies": {
-    "autoprefixer": "^10",
-    "postcss": "^8",
-    "tailwindcss": "^3",
+    "autoprefixer": "^10.4.16",
     "eslint": "^8",
-    "eslint-config-next": "13.5.4"
+    "eslint-config-next": "13.5.4",
+    "postcss": "^8.4.31",
+    "prettier": "^3.0.3",
+    "prettier-plugin-tailwindcss": "^0.5.6",
+    "tailwindcss": "^3.3.3"
   }
 }
