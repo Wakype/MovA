@@ -1,6 +1,6 @@
 {
   "name": "smkdev",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -18,7 +18,7 @@
     "dotenv": "^16.3.1",
     "flowbite": "^1.8.1",
     "flowbite-react": "^0.6.4",
-    "next": "13.5.4",
+    "next": "^13.5.3",
     "next-nprogress-bar": "^2.1.2",
     "react": "^18",
     "react-dom": "^18",
