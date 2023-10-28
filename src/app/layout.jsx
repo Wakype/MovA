@@ -4,6 +4,7 @@ import ReactQuery from '../components/ReactQuery';
 import './globals.css';
 import BottomNavigation from '../sections/bottomNavigation';
 import TopNavigation from '../sections/topNavigation';
+import { Analytics } from '@vercel/analytics/react';
 
 export const metadata = {
   title: 'MovA',
@@ -21,6 +22,7 @@ export default function RootLayout({ children }) {
                 <ProgressBarClient />
                 <TopNavigation />
                 {children}
+                <Analytics />
                 <BottomNavigation />
               </section>
             </CustomChakra>
