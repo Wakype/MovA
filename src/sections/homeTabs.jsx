@@ -165,7 +165,7 @@ const HomeSection = () => {
               isFetcing={isFetchingMovie}
               isLoading={isLoadingMovie}
             />
-            <div className="mt-10 flex w-full scale-125 justify-center">
+            <div className="mt-10 flex scale-75 justify-center">
               <ReactPaginate
                 pageCount={pageCount}
                 marginPagesDisplayed={1}
@@ -192,7 +192,7 @@ const HomeSection = () => {
               isFetcing={isFetchingAnime}
               isLoading={isLoadingAnime}
             />
-            <div className="mt-10 flex w-full scale-125 justify-center">
+            <div className="mt-10 flex scale-75 justify-center">
               <ReactPaginate
                 pageCount={pageCount}
                 marginPagesDisplayed={1}

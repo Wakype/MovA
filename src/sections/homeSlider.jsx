@@ -16,6 +16,8 @@ import useMovieModule from "../app/service/service";
 import Image from "next/image";
 import Link from "next/link";
 import { imageUrl } from "@/libs/axios";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 
 const HomeSlider = () => {
   const { useGetMovie, useGetAnime } = useMovieModule();
@@ -36,7 +38,7 @@ const HomeSlider = () => {
 
   const shuffleArray = (array) => {
     if (!Array.isArray(array)) {
-      return array; // Return non-arrays as is
+      return array;
     }
 
     const shuffledArray = [...array];
@@ -55,7 +57,11 @@ const HomeSlider = () => {
   return (
     <Swiper
       modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}
-      slidesPerView={3}
+      slidesPerView={
+        isFetchingAnime || isFetchingMovie || isLoadingAnime || isLoadingMovie
+          ? 1
+          : 3
+      }
       autoplay={{
         pauseOnMouseEnter: false,
         delay: 3500,
@@ -78,29 +84,50 @@ const HomeSlider = () => {
       // onSwiper={(swiper) => console.log(swiper)}
       // onSlideChange={() => console.log('slide change')}
     >
-      {shuffleArray(dataAnime?.results)
-        ?.slice(0, 25)
-        .map((_, i) => {
-          return (
-            <SwiperSlide key={_.id}>
-              <Link href={`/detail/${_.id}`}>
-                <div className="w-full">
-                  <Image
-                    src={imageUrl + _.poster_path}
-                    width="0"
-                    height="0"
-                    sizes="100vw"
-                    className="h-full w-full bg-cover"
-                    quality={100}
-                    loading="eager"
-                    style={{ objectFit: "cover", overflow: "hidden" }}
-                    alt={_.title || _.name}
-                  />
-                </div>
-              </Link>
-            </SwiperSlide>
-          );
-        })}
+      {isErrorAnime || isErrorMovie ? (
+        <SwiperSlide>
+          <p>Terjadi Kesalahan</p>
+        </SwiperSlide>
+      ) : isFetchingAnime ||
+        isFetchingMovie ||
+        isLoadingAnime ||
+        isLoadingMovie ? (
+        Array.from({ length: 5 }, (_, i) => (
+          <SwiperSlide key={i}>
+            <div className="w-full rounded-[10px] overflow-hidden">
+              <Skeleton height={600} baseColor="#EB507F" className="mb-5" />
+            </div>
+          </SwiperSlide>
+        ))
+      ) : dataAnime?.total_results === 0 || dataMovie?.total_results === 0 ? (
+        <SwiperSlide>
+          <p>Terjadi Kesalahan</p>
+        </SwiperSlide>
+      ) : (
+        shuffleArray(dataAnime?.results)
+          ?.slice(0, 25)
+          .map((_, i) => {
+            return (
+              <SwiperSlide key={_.id}>
+                <Link href={`/detail/${_.id}`}>
+                  <div className="w-full">
+                    <Image
+                      src={imageUrl + _.poster_path}
+                      width="0"
+                      height="0"
+                      sizes="100vw"
+                      className="h-full w-full bg-cover"
+                      quality={100}
+                      loading="eager"
+                      style={{ objectFit: "cover", overflow: "hidden" }}
+                      alt={_.title || _.name}
+                    />
+                  </div>
+                </Link>
+              </SwiperSlide>
+            );
+          })
+      )}
     </Swiper>
   );
 };
