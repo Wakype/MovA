@@ -6,7 +6,7 @@ import { AiTwotoneStar } from 'react-icons/ai';
 const Card = ({ image, title, overview, popularity }) => {
   return (
     <>
-      <div className="w-full overflow-hidden rounded-xl flex flex-col items-start cursor-pointer hover:scale-105">
+      <div className="anti-overflow w-full overflow-hidden rounded-xl flex flex-col items-start cursor-pointer hover:scale-105">
         <div className="w-full mb-3 h-[430px] relative border rounded-xl border-[#FE024E] overflow-hidden shadow-lg">
           <Image
             src={imageUrl + image}
@@ -14,7 +14,7 @@ const Card = ({ image, title, overview, popularity }) => {
             width="0"
             height="0"
             sizes="100vw"
-            className="h-full w-full bg-cover"
+            className="h-full w-full bg-cover anti-overflow"
             quality={100}
             loading="eager"
             style={{ objectFit: 'cover', overflow: 'hidden' }}

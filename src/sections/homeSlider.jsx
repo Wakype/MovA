@@ -57,11 +57,7 @@ const HomeSlider = () => {
   return (
     <Swiper
       modules={[Navigation, Pagination, Scrollbar, A11y, Autoplay]}
-      slidesPerView={
-        isFetchingAnime || isFetchingMovie || isLoadingAnime || isLoadingMovie
-          ? 1
-          : 3
-      }
+      slidesPerView={3}
       autoplay={{
         pauseOnMouseEnter: false,
         delay: 3500,
@@ -71,7 +67,7 @@ const HomeSlider = () => {
       loop={true}
       // pagination={{ clickable: true }}
       breakpoints={{
-        300: {
+        200: {
           slidesPerView: 1,
         },
         1000: {
@@ -94,7 +90,7 @@ const HomeSlider = () => {
         isLoadingMovie ? (
         Array.from({ length: 5 }, (_, i) => (
           <SwiperSlide key={i}>
-            <div className="w-full rounded-[10px] overflow-hidden">
+            <div className="w-full overflow-hidden rounded-[10px]">
               <Skeleton height={600} baseColor="#EB507F" className="mb-5" />
             </div>
           </SwiperSlide>
