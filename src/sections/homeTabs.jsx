@@ -18,6 +18,13 @@ import { FaFilter } from "react-icons/fa6";
 import ReactPaginate from "react-paginate";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
+const genreMap = {
+  2: 28,
+  3: 12,
+  4: 878,
+  5: 35,
+};
+
 const HomeSection = () => {
   const [isMobileView, setIsMobileView] = useState(false);
   const [sortBy, setSortBy] = useState("popularity.desc");
@@ -72,43 +79,42 @@ const HomeSection = () => {
     refetchAnime();
   };
 
-  useEffect(() => {
-    switch (tabIndex) {
-      case 2:
-        setGenre(28);
-        break;
-      case 3:
-        setGenre(12);
-        break;
-      case 4:
-        setGenre(878);
-        break;
-      case 5:
-        setGenre(35);
-        break;
-      default:
-        setGenre(undefined);
-        break;
-    }
+  const Pagination = () => (
+    <ReactPaginate
+      pageCount={pageCount}
+      marginPagesDisplayed={1}
+      breakLabel={"..."}
+      pageRangeDisplayed={3}
+      onPageChange={(selected) => handlePageChange(selected.selected)}
+      containerClassName="pagination flex items-center space-x-5"
+      pageClassName="mx-2 border border-[#eb507f] px-3 rounded-full"
+      activeClassName="bg-[#eb507f] text-white px-3 rounded-full"
+      previousLabel={<FaChevronLeft color="#eb507f" />}
+      nextLabel={<FaChevronRight color="#eb507f" />}
+      previousClassName="border p-2 rounded-full"
+      nextClassName="border p-2 rounded-full"
+      previousLinkClassName="text-blue-500"
+      nextLinkClassName="text-blue-500"
+    />
+  );
 
+  useEffect(() => {
+    setGenre(genreMap[tabIndex] || undefined);
+    refetchMovie();
+  }, [tabIndex]);
+
+  useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth <= 768) {
-        setIsMobileView(true);
-      } else {
-        setIsMobileView(false);
-      }
+      setIsMobileView(window.innerWidth <= 768);
     };
 
     window.addEventListener("resize", handleResize);
-
     handleResize();
-    refetchMovie();
 
     return () => {
       window.removeEventListener("resize", handleResize);
     };
-  }, [tabIndex]);
-
+  }, []);
   return (
     <div className="w-full">
       <Tabs
@@ -191,22 +197,7 @@ const HomeSection = () => {
               isLoading={isLoadingMovie}
             />
             <div className="mt-10 flex justify-center">
-              <ReactPaginate
-                pageCount={pageCount}
-                marginPagesDisplayed={1}
-                breakLabel={"..."}
-                pageRangeDisplayed={3}
-                onPageChange={(selected) => handlePageChange(selected.selected)}
-                containerClassName="pagination flex items-center space-x-5"
-                pageClassName="mx-2 border border-[#eb507f] px-3 rounded-full"
-                activeClassName="bg-[#eb507f] text-white px-3 rounded-full"
-                previousLabel={<FaChevronLeft color="#eb507f" />}
-                nextLabel={<FaChevronRight color="#eb507f" />}
-                previousClassName="border p-2 rounded-full"
-                nextClassName="border p-2 rounded-full"
-                previousLinkClassName="text-blue-500"
-                nextLinkClassName="text-blue-500"
-              />
+              <Pagination />
             </div>
           </TabPanel>
           <TabPanel>
@@ -218,22 +209,7 @@ const HomeSection = () => {
               isLoading={isLoadingAnime}
             />
             <div className="mt-10 flex justify-center">
-              <ReactPaginate
-                pageCount={pageCount}
-                marginPagesDisplayed={1}
-                breakLabel={"..."}
-                pageRangeDisplayed={3}
-                onPageChange={(selected) => handlePageChange(selected.selected)}
-                containerClassName="pagination flex items-center space-x-5"
-                pageClassName="mx-2 border border-[#eb507f] px-3 rounded-full"
-                activeClassName="bg-[#eb507f] text-white px-3 rounded-full"
-                previousLabel={<FaChevronLeft color="#eb507f" />}
-                nextLabel={<FaChevronRight color="#eb507f" />}
-                previousClassName="border p-2 rounded-full"
-                nextClassName="border p-2 rounded-full"
-                previousLinkClassName="text-blue-500"
-                nextLinkClassName="text-blue-500"
-              />
+              <Pagination />
             </div>
           </TabPanel>
           <TabPanel>
@@ -245,22 +221,7 @@ const HomeSection = () => {
               isLoading={isLoadingMovie}
             />
             <div className="mt-10 flex justify-center">
-              <ReactPaginate
-                pageCount={pageCount}
-                marginPagesDisplayed={1}
-                breakLabel={"..."}
-                pageRangeDisplayed={3}
-                onPageChange={(selected) => handlePageChange(selected.selected)}
-                containerClassName="pagination flex items-center space-x-5"
-                pageClassName="mx-2 border border-[#eb507f] px-3 rounded-full"
-                activeClassName="bg-[#eb507f] text-white px-3 rounded-full"
-                previousLabel={<FaChevronLeft color="#eb507f" />}
-                nextLabel={<FaChevronRight color="#eb507f" />}
-                previousClassName="border p-2 rounded-full"
-                nextClassName="border p-2 rounded-full"
-                previousLinkClassName="text-blue-500"
-                nextLinkClassName="text-blue-500"
-              />
+              <Pagination />
             </div>
           </TabPanel>
           <TabPanel>
@@ -272,22 +233,7 @@ const HomeSection = () => {
               isLoading={isLoadingMovie}
             />
             <div className="mt-10 flex justify-center">
-              <ReactPaginate
-                pageCount={pageCount}
-                marginPagesDisplayed={1}
-                breakLabel={"..."}
-                pageRangeDisplayed={3}
-                onPageChange={(selected) => handlePageChange(selected.selected)}
-                containerClassName="pagination flex items-center space-x-5"
-                pageClassName="mx-2 border border-[#eb507f] px-3 rounded-full"
-                activeClassName="bg-[#eb507f] text-white px-3 rounded-full"
-                previousLabel={<FaChevronLeft color="#eb507f" />}
-                nextLabel={<FaChevronRight color="#eb507f" />}
-                previousClassName="border p-2 rounded-full"
-                nextClassName="border p-2 rounded-full"
-                previousLinkClassName="text-blue-500"
-                nextLinkClassName="text-blue-500"
-              />
+              <Pagination />
             </div>
           </TabPanel>
           <TabPanel>
@@ -299,22 +245,7 @@ const HomeSection = () => {
               isLoading={isLoadingMovie}
             />
             <div className="mt-10 flex justify-center">
-              <ReactPaginate
-                pageCount={pageCount}
-                marginPagesDisplayed={1}
-                breakLabel={"..."}
-                pageRangeDisplayed={3}
-                onPageChange={(selected) => handlePageChange(selected.selected)}
-                containerClassName="pagination flex items-center space-x-5"
-                pageClassName="mx-2 border border-[#eb507f] px-3 rounded-full"
-                activeClassName="bg-[#eb507f] text-white px-3 rounded-full"
-                previousLabel={<FaChevronLeft color="#eb507f" />}
-                nextLabel={<FaChevronRight color="#eb507f" />}
-                previousClassName="border p-2 rounded-full"
-                nextClassName="border p-2 rounded-full"
-                previousLinkClassName="text-blue-500"
-                nextLinkClassName="text-blue-500"
-              />
+              <Pagination />
             </div>
           </TabPanel>
           <TabPanel>
@@ -326,22 +257,7 @@ const HomeSection = () => {
               isLoading={isLoadingMovie}
             />
             <div className="mt-10 flex justify-center">
-              <ReactPaginate
-                pageCount={pageCount}
-                marginPagesDisplayed={1}
-                breakLabel={"..."}
-                pageRangeDisplayed={3}
-                onPageChange={(selected) => handlePageChange(selected.selected)}
-                containerClassName="pagination flex items-center space-x-5"
-                pageClassName="mx-2 border border-[#eb507f] px-3 rounded-full"
-                activeClassName="bg-[#eb507f] text-white px-3 rounded-full"
-                previousLabel={<FaChevronLeft color="#eb507f" />}
-                nextLabel={<FaChevronRight color="#eb507f" />}
-                previousClassName="border p-2 rounded-full"
-                nextClassName="border p-2 rounded-full"
-                previousLinkClassName="text-blue-500"
-                nextLinkClassName="text-blue-500"
-              />
+              <Pagination />
             </div>
           </TabPanel>
         </section>
